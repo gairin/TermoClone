@@ -1,0 +1,9 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#main-termo {
+    margin: 0 auto; 
+    max-width: 600px;
+}

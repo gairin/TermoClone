@@ -1,0 +1,21 @@
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#brdTable {
+    margin: 0 auto;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+  
+#brdTable td {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid grey;
+    padding: 0;
+}

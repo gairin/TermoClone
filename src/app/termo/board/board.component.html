@@ -1,0 +1,11 @@
+<div id="container">
+    <table id="brdTable">
+        <tbody>
+            <tr *ngFor="let row of boardMatrix">
+                <td *ngFor="let box of row">
+                    {{ box }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
