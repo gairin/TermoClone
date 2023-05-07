@@ -42,20 +42,19 @@ export class KeyboardComponent implements OnInit {
             }
         }
         
-        let kbTd = this.keyboard!.querySelectorAll("td");
-        let lastTwo = Array.from(kbTd).slice(-2);
+        let keyboardTD = this.keyboard!.querySelectorAll("td");
+        let lastTwo = Array.from(keyboardTD).slice(-2);
 
         const backspaceButton = lastTwo[0];
         const okButton = lastTwo[1];
 
-        // Por ora, placeholders para implementar depois
         backspaceButton.addEventListener('click', () => {
-            console.log('Funcionou');
+            this.boardComponent.backspace();
         });
 
         okButton.style.backgroundColor = '#dc1b1b';
         okButton.addEventListener('click', () => {
-            console.log('Funcionou');
+            this.boardComponent.confirmAttempt();
         });
     }
 

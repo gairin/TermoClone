@@ -15,10 +15,6 @@ export class GameService implements OnInit {
         this.word = null;
     }
 
-    ngOnInit() {
-        this.newGame();
-    }
-
     newGame(): void {
         var randi = Math.floor(Math.random() * this.wordlist!.length);
         this.word = this.wordlist[randi].toUpperCase();
@@ -26,8 +22,13 @@ export class GameService implements OnInit {
         console.log(this.word);
     }
 
-    verifyWord() {
-        console.log("disparou verifyWord()");
+    win() {
+        // placeholder
+        alert('GANHOU');
+    }
+
+    ngOnInit() {
+        this.newGame();
     }
 
 }

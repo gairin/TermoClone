@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { GameService } from '../game.service';
+import { VerifyService } from '../verify.service';
 
 @Component({
     selector: 'app-board',
@@ -12,8 +14,9 @@ export class BoardComponent implements OnInit {
     currentBox: number;
     boardHTML: HTMLTableElement | null;
     boardMatrix: string[][];
+    triedWord: string;
 
-    constructor() {
+    constructor(private gameService: GameService, private verifyService: VerifyService) {
         this.currentRow = 0;
         this.currentBox = 0;
         this.boardHTML = null;
@@ -25,6 +28,7 @@ export class BoardComponent implements OnInit {
             [' ', ' ', ' ', ' ', ' '],
             [' ', ' ', ' ', ' ', ' '],
         ];
+        this.triedWord = '';
 
         window.addEventListener('load', () => {
             const tableElement = document.querySelector("#brdTable > tbody") as HTMLTableElement;
@@ -38,7 +42,6 @@ export class BoardComponent implements OnInit {
     charHandle(letter: string): void {
         // CHECKPOINT: O básico funciona.
         // Falta implementar a logica de verificação
-        console.log(letter);
         if (this.currentBox == (this.boardMatrix[0].length)) {
             return;
         }
@@ -53,6 +56,38 @@ export class BoardComponent implements OnInit {
         cell.innerHTML = letter;
 
         this.currentBox++;
+    }
+
+    confirmAttempt(): void {
+        // É necessário adicionar uma verificação de que se todas
+        // as colunas foram preenchidas antes do ok.
+
+        for (let i = 0; i < this.boardMatrix[0].length; i++) {
+            this.triedWord += this.boardMatrix[this.currentRow][i]
+        }
+        
+        this.verifyService.verifyWord(this.triedWord);
+
+        // Desde já documentando, isto pode dar erro de out of index
+        // no caso da última coluna. Uma possível solução é receber
+        // um bool de retorno desta função acima, definindo se houve
+        // a vitória ou não, e daí fazer algumas condicionais.
+        this.currentRow++;
+        this.currentBox = 0;
+    }
+
+    backspace(): void {
+        if (this.currentBox == 0) {
+            return;
+        }
+
+        this.currentBox--;
+
+        var cell = this.boardHTML!.children[this.currentRow].children[this.currentBox] as HTMLTableCellElement; 
+        cell.contentEditable = 'true';
+        cell.innerHTML = ' ';
+
+        this.boardMatrix[this.currentRow][this.currentBox] = ' ';
     }
 
     ngOnInit() { }
