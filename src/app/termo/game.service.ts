@@ -26,4 +26,8 @@ export class GameService implements OnInit {
         console.log(this.word);
     }
 
+    verifyWord() {
+        console.log("disparou verifyWord()");
+    }
+
 }
