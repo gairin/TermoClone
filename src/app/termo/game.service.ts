@@ -22,7 +22,7 @@ export class GameService implements OnInit {
         console.log(this.word);
     }
 
-    win() {
+    win(): void {
         // placeholder
         alert('GANHOU');
     }

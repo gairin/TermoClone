@@ -40,8 +40,6 @@ export class BoardComponent implements OnInit {
     }
 
     charHandle(letter: string): void {
-        // CHECKPOINT: O básico funciona.
-        // Falta implementar a logica de verificação
         if (this.currentBox == (this.boardMatrix[0].length)) {
             return;
         }
@@ -58,15 +56,31 @@ export class BoardComponent implements OnInit {
         this.currentBox++;
     }
 
+    paintSquares(colorCodes: string[]) {
+        for (let i = 0; i < this.boardMatrix[0].length; i++) {           
+            var cell = this.boardHTML!.children[this.currentRow].children[i] as HTMLTableCellElement;
+            cell.style.backgroundColor = colorCodes[i];
+        }
+    }
+
     confirmAttempt(): void {
-        // É necessário adicionar uma verificação de que se todas
-        // as colunas foram preenchidas antes do ok.
+        this.triedWord = '';
 
         for (let i = 0; i < this.boardMatrix[0].length; i++) {
+            // this.triedWord é potencialmente desnecessário
+            // por ora vou mantê-la pois acho que será útil e
+            // conveniente para motivos de exibição
             this.triedWord += this.boardMatrix[this.currentRow][i]
         }
+
+        console.log(this.boardMatrix[this.currentRow]);
+
+        if (this.triedWord.includes(' ')) {
+            return;
+        }
         
-        this.verifyService.verifyWord(this.triedWord);
+        var colorCodes: string[] = this.verifyService.verifyWord(this.triedWord);
+        this.paintSquares(colorCodes);
 
         // Desde já documentando, isto pode dar erro de out of index
         // no caso da última coluna. Uma possível solução é receber

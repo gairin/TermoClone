@@ -58,7 +58,6 @@ export class KeyboardComponent implements OnInit {
         });
     }
 
-    // BUG: selecionar várias teclas (segurar o botão do mouse) faz bugar tudo lol
     charInput(event: MouseEvent): void {
         const target: HTMLElement = event.target as HTMLElement;
         var letter: string = target.innerText
