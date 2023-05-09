@@ -74,7 +74,6 @@ export class KeyboardComponent implements OnInit {
     }
 
     private paintBoxes(colorKey: string[]): void {
-        // em desenvolvimento
         let x: number = 0;
         let letters: string = this.boardComponent.triedWord;
 
