@@ -62,10 +62,10 @@ export class BoardComponent implements OnInit {
         this.currentBox++;
     }
 
-    private paintSquares(colorCodes: string[]) {
+    private paintSquares(colorArr: string[]) {
         for (let i = 0; i < this.boardMatrix[0].length; i++) {           
             let cell: HTMLTableCellElement = this.boardHTML!.children[this.currentRow].children[i] as HTMLTableCellElement;
-            cell.style.backgroundColor = colorCodes[i];
+            cell.style.backgroundColor = colorArr[i];
         }
     }
 
@@ -77,9 +77,6 @@ export class BoardComponent implements OnInit {
         this.triedWord = '';
 
         for (let i = 0; i < this.boardMatrix[0].length; i++) {
-            // this.triedWord é potencialmente desnecessário
-            // por ora vou mantê-la pois acho que será útil e
-            // conveniente para motivos de exibição
             this.triedWord += this.boardMatrix[this.currentRow][i]
         }
 
@@ -87,18 +84,11 @@ export class BoardComponent implements OnInit {
             return;
         }
         
-        let colorCodes: string[] = this.verifyService.verifyWord(this.triedWord);
-        this.colorCodesToKeyboard = colorCodes;
-        this.paintSquares(colorCodes);
+        let colorArr: string[] = this.verifyService.verifyWord(this.triedWord);
+        this.colorCodesToKeyboard = colorArr;
+        this.paintSquares(colorArr);
 
-        if (this.currentRow < 5) {
-            this.currentRow++;
-            this.currentBox = 0;
-        }
-
-        else {
-            this.gameService.lose();
-        }
+        this.currentRow < 5 ? (this.currentRow++, this.currentBox = 0) : this.gameService.lose();
     }
 
     public backspace(): void {

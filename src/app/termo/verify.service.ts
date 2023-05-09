@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { GameService } from './game.service';
-import { KeyboardComponent } from './keyboard/keyboard.component';
 
 @Injectable({
     providedIn: 'root'
@@ -23,38 +22,45 @@ export class VerifyService {
         });
     }
 
+    colorKeys = {
+        doesNotContain: '#696969',
+        containsWrongSpot: '#FFCC00',
+        containsRightSpot: '#006600'
+    }
+
     public verifyWord(triedWord: string): string[] {
         let word: string = this.gameService.word!;
 
-        // acertou a palavra
         if (triedWord == word) {
             this.gameService.win();
 
-            return ['green', 'green', 'green', 'green', 'green'];
+            return new Array(5).fill(this.colorKeys.containsRightSpot);
         }
 
         let colorArr: string[] = new Array(5);
 
         // lógica de verificação
         for (let i = 0; i < triedWord.length; i++) {
+            // certo no certo
             if (triedWord[i] == word![i]) {
-                colorArr[i] = 'green';
+                colorArr[i] = this.colorKeys.containsRightSpot;
 
                 word = word.replace(triedWord[i], "-");
             }
 
+            // certo no errado
             else if (word?.includes(triedWord[i])) {
-                colorArr[i] = 'yellow';
+                colorArr[i] = this.colorKeys.containsWrongSpot;
 
                 word = word.replace(triedWord[i], "-");
             }
 
+            // não tem
             else {
-                colorArr[i] = 'gray';
+                colorArr[i] = this.colorKeys.doesNotContain;
             }
         }
 
-        
         return colorArr;
     }
 }

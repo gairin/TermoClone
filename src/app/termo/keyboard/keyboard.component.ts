@@ -73,7 +73,7 @@ export class KeyboardComponent implements OnInit {
         this.boardComponent.charHandle(letter);
     }
 
-    private paintBoxes(colorKey: string[]): void {
+    private paintBoxes(colorArr: string[]): void {
         let x: number = 0;
         let letters: string = this.boardComponent.triedWord;
 
@@ -82,7 +82,7 @@ export class KeyboardComponent implements OnInit {
                 let key: HTMLTableCellElement = this.keyboard!.children[i].children[j] as HTMLTableCellElement;
                 
                 if (letters.includes(key.innerHTML.replace(/\s/g, ''))) {
-                    key.style.backgroundColor = colorKey[
+                    key.style.backgroundColor = colorArr[
                         letters.indexOf(key.innerHTML.replace(/\s/g, ''))
                     ];
 
