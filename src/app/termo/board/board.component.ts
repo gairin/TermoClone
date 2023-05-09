@@ -15,8 +15,12 @@ export class BoardComponent implements OnInit {
     boardHTML: HTMLTableElement | null;
     boardMatrix: string[][];
     triedWord: string;
+    colorCodesToKeyboard: string[];
 
-    constructor(private gameService: GameService, private verifyService: VerifyService) {
+    constructor(
+        private gameService: GameService,
+        private verifyService: VerifyService
+        ) {
         // indexadas em zero
         this.currentRow = 0;
         this.currentBox = 0;
@@ -30,6 +34,7 @@ export class BoardComponent implements OnInit {
             [' ', ' ', ' ', ' ', ' '],
         ];
         this.triedWord = '';
+        this.colorCodesToKeyboard = [];
 
         window.addEventListener('load', () => {
             const tableElement = document.querySelector("#brdTable > tbody") as HTMLTableElement;
@@ -40,7 +45,7 @@ export class BoardComponent implements OnInit {
         });
     }
 
-    charHandle(letter: string): void {
+    public charHandle(letter: string): void {
         if (this.currentBox == (this.boardMatrix[0].length)) {
             return;
         }
@@ -50,21 +55,21 @@ export class BoardComponent implements OnInit {
         this.updateBoard(letter);
     }
     
-    updateBoard(letter: string): void {
-        var cell = this.boardHTML!.children[this.currentRow].children[this.currentBox];
+    private updateBoard(letter: string): void {
+        let cell = this.boardHTML!.children[this.currentRow].children[this.currentBox];
         cell.innerHTML = letter;
 
         this.currentBox++;
     }
 
-    paintSquares(colorCodes: string[]) {
+    private paintSquares(colorCodes: string[]) {
         for (let i = 0; i < this.boardMatrix[0].length; i++) {           
-            var cell = this.boardHTML!.children[this.currentRow].children[i] as HTMLTableCellElement;
+            let cell = this.boardHTML!.children[this.currentRow].children[i] as HTMLTableCellElement;
             cell.style.backgroundColor = colorCodes[i];
         }
     }
 
-    confirmAttempt(): void {
+    public confirmAttempt(): void {
         if (this.gameService.ended == true) {
             return;
         }
@@ -82,7 +87,8 @@ export class BoardComponent implements OnInit {
             return;
         }
         
-        var colorCodes: string[] = this.verifyService.verifyWord(this.triedWord);
+        let colorCodes: string[] = this.verifyService.verifyWord(this.triedWord);
+        this.colorCodesToKeyboard = colorCodes;
         this.paintSquares(colorCodes);
 
         if (this.currentRow < 5) {
@@ -95,14 +101,14 @@ export class BoardComponent implements OnInit {
         }
     }
 
-    backspace(): void {
+    public backspace(): void {
         if (this.currentBox == 0 || this.gameService.ended == true) {
             return;
         }
 
         this.currentBox--;
 
-        var cell = this.boardHTML!.children[this.currentRow].children[this.currentBox] as HTMLTableCellElement; 
+        let cell = this.boardHTML!.children[this.currentRow].children[this.currentBox] as HTMLTableCellElement; 
         cell.contentEditable = 'true';
         cell.innerHTML = ' ';
 

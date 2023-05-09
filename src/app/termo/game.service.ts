@@ -17,19 +17,19 @@ export class GameService implements OnInit {
         this.ended = false;
     }
 
-    newGame(): void {
-        var randi = Math.floor(Math.random() * this.wordlist!.length);
+    public newGame(): void {
+        let randi = Math.floor(Math.random() * this.wordlist!.length);
         this.word = this.wordlist[randi].toUpperCase();
         console.log(this.word);
     }
 
-    win(): void {
+    public win(): void {
         // placeholder
         alert('GANHOU');
         this.ended = true;
     }
 
-    lose(): void {
+    public lose(): void {
         //placeholder
         alert('PERDEU');
         this.ended = true;

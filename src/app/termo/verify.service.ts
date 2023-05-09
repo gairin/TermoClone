@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GameService } from './game.service';
+import { KeyboardComponent } from './keyboard/keyboard.component';
 
 @Injectable({
     providedIn: 'root'
@@ -22,24 +23,8 @@ export class VerifyService {
         });
     }
 
-    countOccurrences(str: string): {[key: string]: number} {
-        var count: {[key: string]: number} = {}
-        
-        for (let char of str) {
-            if (count[char]) {
-                count[char]++;
-            }
-
-            else {
-                count[char] = 1;
-            }
-        }
-        
-        return count;
-    }
-
-    verifyWord(triedWord: string): string[] {
-        var word: string = this.gameService.word!;
+    public verifyWord(triedWord: string): string[] {
+        let word: string = this.gameService.word!;
 
         // acertou a palavra
         if (triedWord == word) {
@@ -48,7 +33,7 @@ export class VerifyService {
             return ['green', 'green', 'green', 'green', 'green'];
         }
 
-        var colorArr: string[] = new Array(5);
+        let colorArr: string[] = new Array(5);
 
         // lógica de verificação
         for (let i = 0; i < triedWord.length; i++) {
@@ -69,6 +54,7 @@ export class VerifyService {
             }
         }
 
+        
         return colorArr;
     }
 }
