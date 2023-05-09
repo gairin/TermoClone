@@ -15,7 +15,7 @@ export class VerifyService {
         this.boardHTML = null;
         
         window.addEventListener('load', () => {
-            const tableElement = document.querySelector("#brdTable > tbody") as HTMLTableElement;
+            const tableElement: HTMLTableElement = document.querySelector("#brdTable > tbody") as HTMLTableElement;
             
             if (tableElement) {
                 this.boardHTML = tableElement;

@@ -26,7 +26,7 @@ export class KeyboardComponent implements OnInit {
     }
 
     ngAfterViewInit(): void {
-        const lastCell = document.querySelector("#kbTable > tbody > tr:nth-child(3) > td:nth-child(9)") as HTMLTableCellElement;
+        const lastCell: HTMLTableCellElement = document.querySelector("#kbTable > tbody > tr:nth-child(3) > td:nth-child(9)") as HTMLTableCellElement;
 
         lastCell.colSpan = 2;
 
@@ -36,7 +36,7 @@ export class KeyboardComponent implements OnInit {
                     break;
                 }
                 
-                let key = this.keyboard?.children[i].children[j] as HTMLElement;
+                let key: HTMLElement = this.keyboard?.children[i].children[j] as HTMLElement;
                 
                 key?.addEventListener('click', ($event) => {
                     $event.preventDefault();
@@ -45,11 +45,11 @@ export class KeyboardComponent implements OnInit {
             }
         }
         
-        let keyboardTD = this.keyboard!.querySelectorAll("td");
-        let lastTwo = Array.from(keyboardTD).slice(-2);
+        let keyboardTD: NodeListOf<HTMLTableCellElement> = this.keyboard!.querySelectorAll("td");
+        let lastTwo: HTMLTableCellElement[] = Array.from(keyboardTD).slice(-2);
 
-        const backspaceButton = lastTwo[0];
-        const okButton = lastTwo[1];
+        const backspaceButton: HTMLTableCellElement = lastTwo[0];
+        const okButton: HTMLTableCellElement = lastTwo[1];
 
         backspaceButton.addEventListener('click', () => {
             this.boardComponent.backspace();

@@ -37,7 +37,7 @@ export class BoardComponent implements OnInit {
         this.colorCodesToKeyboard = [];
 
         window.addEventListener('load', () => {
-            const tableElement = document.querySelector("#brdTable > tbody") as HTMLTableElement;
+            const tableElement: HTMLTableElement = document.querySelector("#brdTable > tbody") as HTMLTableElement;
             
             if (tableElement) {
                 this.boardHTML = tableElement;
@@ -56,7 +56,7 @@ export class BoardComponent implements OnInit {
     }
     
     private updateBoard(letter: string): void {
-        let cell = this.boardHTML!.children[this.currentRow].children[this.currentBox];
+        let cell: Element = this.boardHTML!.children[this.currentRow].children[this.currentBox];
         cell.innerHTML = letter;
 
         this.currentBox++;
@@ -64,7 +64,7 @@ export class BoardComponent implements OnInit {
 
     private paintSquares(colorCodes: string[]) {
         for (let i = 0; i < this.boardMatrix[0].length; i++) {           
-            let cell = this.boardHTML!.children[this.currentRow].children[i] as HTMLTableCellElement;
+            let cell: HTMLTableCellElement = this.boardHTML!.children[this.currentRow].children[i] as HTMLTableCellElement;
             cell.style.backgroundColor = colorCodes[i];
         }
     }
@@ -108,7 +108,7 @@ export class BoardComponent implements OnInit {
 
         this.currentBox--;
 
-        let cell = this.boardHTML!.children[this.currentRow].children[this.currentBox] as HTMLTableCellElement; 
+        let cell: HTMLTableCellElement = this.boardHTML!.children[this.currentRow].children[this.currentBox] as HTMLTableCellElement; 
         cell.contentEditable = 'true';
         cell.innerHTML = ' ';
 

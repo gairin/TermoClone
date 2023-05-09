@@ -18,7 +18,7 @@ export class GameService implements OnInit {
     }
 
     public newGame(): void {
-        let randi = Math.floor(Math.random() * this.wordlist!.length);
+        let randi: number = Math.floor(Math.random() * this.wordlist!.length);
         this.word = this.wordlist[randi].toUpperCase();
         console.log(this.word);
     }
