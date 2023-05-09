@@ -56,14 +56,12 @@ export class VerifyService {
                 colorArr[i] = 'green';
 
                 word = word.replace(triedWord[i], "-");
-                console.log(word);
             }
 
             else if (word?.includes(triedWord[i])) {
                 colorArr[i] = 'yellow';
 
                 word = word.replace(triedWord[i], "-");
-                console.log(word);
             }
 
             else {

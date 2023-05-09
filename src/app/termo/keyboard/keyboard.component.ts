@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { BoardComponent } from '../board/board.component';
+import { GameService } from '../game.service';
 
 @Component({
     selector: 'app-keyboard',
@@ -11,7 +12,10 @@ import { BoardComponent } from '../board/board.component';
 export class KeyboardComponent implements OnInit {
     keyboard: HTMLTableElement | null;
 
-    constructor(private boardComponent: BoardComponent) {
+    constructor(
+        private boardComponent: BoardComponent,
+        private gameService: GameService
+        ) {
         this.keyboard = null;
     }
 
@@ -59,6 +63,10 @@ export class KeyboardComponent implements OnInit {
     }
 
     charInput(event: MouseEvent): void {
+        if (this.gameService.ended == true) {
+            return;
+        }
+
         const target: HTMLElement = event.target as HTMLElement;
         var letter: string = target.innerText
 

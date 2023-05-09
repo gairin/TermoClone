@@ -17,6 +17,7 @@ export class BoardComponent implements OnInit {
     triedWord: string;
 
     constructor(private gameService: GameService, private verifyService: VerifyService) {
+        // indexadas em zero
         this.currentRow = 0;
         this.currentBox = 0;
         this.boardHTML = null;
@@ -64,6 +65,10 @@ export class BoardComponent implements OnInit {
     }
 
     confirmAttempt(): void {
+        if (this.gameService.ended == true) {
+            return;
+        }
+
         this.triedWord = '';
 
         for (let i = 0; i < this.boardMatrix[0].length; i++) {
@@ -73,8 +78,6 @@ export class BoardComponent implements OnInit {
             this.triedWord += this.boardMatrix[this.currentRow][i]
         }
 
-        console.log(this.boardMatrix[this.currentRow]);
-
         if (this.triedWord.includes(' ')) {
             return;
         }
@@ -82,16 +85,18 @@ export class BoardComponent implements OnInit {
         var colorCodes: string[] = this.verifyService.verifyWord(this.triedWord);
         this.paintSquares(colorCodes);
 
-        // Desde já documentando, isto pode dar erro de out of index
-        // no caso da última coluna. Uma possível solução é receber
-        // um bool de retorno desta função acima, definindo se houve
-        // a vitória ou não, e daí fazer algumas condicionais.
-        this.currentRow++;
-        this.currentBox = 0;
+        if (this.currentRow < 5) {
+            this.currentRow++;
+            this.currentBox = 0;
+        }
+
+        else {
+            this.gameService.lose();
+        }
     }
 
     backspace(): void {
-        if (this.currentBox == 0) {
+        if (this.currentBox == 0 || this.gameService.ended == true) {
             return;
         }
 
