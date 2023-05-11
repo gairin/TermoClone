@@ -7,19 +7,21 @@ import { OnInit } from '@angular/core';
 })
 
 export class GameService implements OnInit {
-    wordlist: string[];
+    wordlist: string[] | null;
     word: string | null;
     ended: boolean;
+    wordsService: WordsService
 
     constructor(wordsService: WordsService) {
-        this.wordlist = wordsService.getWords();
+        this.wordlist = null;
         this.word = null;
         this.ended = false;
+        this.wordsService = wordsService;
     }
 
     public newGame(): void {
         let randi: number = Math.floor(Math.random() * this.wordlist!.length);
-        this.word = this.wordlist[randi].toUpperCase();
+        this.word = this.wordlist![randi].toUpperCase();
         console.log("Palavra: " + this.word);
     }
 
@@ -36,6 +38,7 @@ export class GameService implements OnInit {
     }
 
     ngOnInit() {
+        this.wordlist = this.wordsService.getWords();
         this.newGame();
     }
 }
