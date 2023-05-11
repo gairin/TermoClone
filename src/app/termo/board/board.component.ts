@@ -25,14 +25,7 @@ export class BoardComponent implements OnInit {
         this.currentRow = 0;
         this.currentBox = 0;
         this.boardHTML = null;
-        this.boardMatrix = [
-            [' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' '],
-        ];
+        this.boardMatrix = Array.from({ length: 6 }, () => new Array(5).fill(" "));
         this.triedWord = '';
         this.colorCodesToKeyboard = [];
 
@@ -70,7 +63,7 @@ export class BoardComponent implements OnInit {
     }
 
     public confirmAttempt(): void {
-        if (this.gameService.ended == true) {
+        if (this.gameService.ended == true || this.currentBox == 0) {
             return;
         }
 
@@ -84,11 +77,26 @@ export class BoardComponent implements OnInit {
             return;
         }
         
-        let colorArr: string[] = this.verifyService.verifyWord(this.triedWord);
-        this.colorCodesToKeyboard = colorArr;
-        this.paintSquares(colorArr);
+        let data: {colors: string[], code: number} = this.verifyService.verifyWord(this.triedWord);
+        this.colorCodesToKeyboard = data.colors;
+        let state: number = data.code;
+        
+        if (state == 1) {
+            this.gameService.win();
+            //this.modalComponent.show(1);
+        } 
+        
+        this.paintSquares(data.colors);
+        
+        if (this.currentRow < 5) {
+            this.currentRow++;
+            this.currentBox = 0
+        } 
 
-        this.currentRow < 5 ? (this.currentRow++, this.currentBox = 0) : this.gameService.lose();
+        else {
+            this.gameService.lose();
+            //this.modalComponent.show(0);
+        }
     }
 
     public backspace(): void {

@@ -10,7 +10,7 @@ export class TermoComponent {
 
     constructor(gameService: GameService) {
         window.addEventListener('load', () => {
-            gameService.newGame()
+            gameService.newGame();
         });
     };   
 }

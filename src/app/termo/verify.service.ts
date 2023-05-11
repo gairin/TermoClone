@@ -22,24 +22,27 @@ export class VerifyService {
         });
     }
 
-    colorKeys = {
+    colorKeys: {
+        doesNotContain: string,
+        containsWrongSpot: string,
+        containsRightSpot: string
+    } = {
         doesNotContain: '#696969',
         containsWrongSpot: '#FFCC00',
         containsRightSpot: '#006600'
     }
 
-    public verifyWord(triedWord: string): string[] {
+    public verifyWord(triedWord: string): { colors: string[], code: number } {
         let word: string = this.gameService.word!;
 
+        // acertou
         if (triedWord == word) {
-            this.gameService.win();
-
-            return new Array(5).fill(this.colorKeys.containsRightSpot);
+            return {colors: new Array(5).fill(this.colorKeys.containsRightSpot), code: 1};
         }
 
         let colorArr: string[] = new Array(5);
 
-        // lógica de verificação
+        // lógica de verificação (não acertou)
         for (let i = 0; i < triedWord.length; i++) {
             // certo no certo
             if (triedWord[i] == word![i]) {
@@ -61,6 +64,6 @@ export class VerifyService {
             }
         }
 
-        return colorArr;
+        return {colors: colorArr, code: 0};
     }
 }

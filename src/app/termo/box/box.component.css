@@ -1,0 +1,25 @@
+body {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#rectangle {
+	width: 50%;
+	height: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    background-color: rgba(75, 75, 75, 0.5);
+}
+
+#rectangle h1 {
+	font-size: 2em;
+	font-weight: bold;
+	color: #000000;
+	text-align: center;
+    background-color: transparent;
+}
