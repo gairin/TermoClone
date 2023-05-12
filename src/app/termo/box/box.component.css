@@ -38,18 +38,6 @@ button {
     background-color: orangered;
 }
 
-p {
-    background-color: transparent;
-    color: white;
-    font-weight: 300;
-    font-size: 110%;
-}
-
-p > span {
-    font-weight: bold;
-    background-color: transparent;
-}
-
 h1 {
     background-color: transparent;
     color: white;

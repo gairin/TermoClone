@@ -37,6 +37,7 @@ export class VerifyService {
 
         // acertou
         if (triedWord == word) {
+            this.gameService.endGame();
             return {colors: new Array(5).fill(this.colorKeys.containsRightSpot), code: 1};
         }
 

@@ -26,14 +26,8 @@ export class GameService {
         console.log("Palavra: " + this._word);
     }
 
-    public win(): void {
+    public endGame(): void {
         this.ended = true;
-        this.boxService.show(1);
-    }
-
-    public lose(): void {
-        this.ended = true;
-        this.boxService.show(0);
     }
 
     get word(): string | null {

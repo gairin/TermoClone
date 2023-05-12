@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { GameService } from '../game.service';
 import { VerifyService } from '../verify.service';
+import { BoxComponent } from '../box/box.component';
 
 @Component({
     selector: 'app-board',
@@ -19,7 +20,8 @@ export class BoardComponent implements OnInit {
 
     constructor(
         private gameService: GameService,
-        private verifyService: VerifyService
+        private verifyService: VerifyService,
+        private boxComponent: BoxComponent
         ) {
         // indexadas em zero
         this.currentRow = 0;
@@ -82,7 +84,8 @@ export class BoardComponent implements OnInit {
         let state: number = data.code;
         
         if (state == 1) {
-            this.gameService.win();
+            this.gameService.endGame();
+            this.boxComponent.generateBox(state, this.currentRow + 1);
         } 
         
         this.paintSquares(data.colors);
@@ -92,8 +95,9 @@ export class BoardComponent implements OnInit {
             this.currentBox = 0
         } 
 
-        else {
-            this.gameService.lose();
+        else if (this.currentRow == 5 && state == 0) {
+            this.gameService.endGame();
+            this.boxComponent.generateBox(state, 6);
         }
     }
 
