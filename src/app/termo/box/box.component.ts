@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { OnInit } from '@angular/core';
+import { BoardComponent } from '../board/board.component';
 
 @Component({
     selector: 'app-box',
@@ -6,18 +8,28 @@ import { Component } from '@angular/core';
     styleUrls: ['./box.component.css']
 })
 
-export class BoxComponent {
-    mode: number | null;
-    show: boolean;
+export class BoxComponent implements OnInit {
+    winMode: HTMLElement | null;
+    loseMode: HTMLElement | null;
+    content: HTMLDivElement | null;
+    showcaseInfo: {
+        "tries": number;
+        "word": string | null;
+    };
 
-    constructor() {
-        // 0 = derrota / 1 = vitória
-        this.mode = null;
-        this.show = false;
+    constructor(private boardComponent: BoardComponent) {
+        this.winMode = null;
+        this.loseMode = null;
+        this.content = null;
+        this.showcaseInfo = {
+            "tries": 0,
+            "word": ''
+        }
     }
 
-    showModal(mode: number): void {
-        this.mode = mode;
-        this.show = true;
+    ngOnInit() {
+        this.content = document.querySelector("#rectangle") as HTMLDivElement;
+
+        this.content.style.display = 'none';
     }
 }

@@ -1,44 +1,42 @@
 import { Injectable } from '@angular/core';
 import { WordsService } from './words.service';
-import { OnInit } from '@angular/core';
+import { BoxService } from './box/box.service';
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class GameService implements OnInit {
+export class GameService {
     wordlist: string[] | null;
-    word: string | null;
+    private _word: string | null;
     ended: boolean;
-    wordsService: WordsService
 
-    constructor(wordsService: WordsService) {
-        this.wordlist = null;
-        this.word = null;
+    constructor(
+        private wordsService: WordsService,
+        private boxService: BoxService
+        ) {
+        this.wordlist = wordsService.getWords();
+        this._word = null;
         this.ended = false;
-        this.wordsService = wordsService;
     }
 
     public newGame(): void {
         let randi: number = Math.floor(Math.random() * this.wordlist!.length);
-        this.word = this.wordlist![randi].toUpperCase();
-        console.log("Palavra: " + this.word);
+        this._word = this.wordlist![randi].toUpperCase();
+        console.log("Palavra: " + this._word);
     }
 
     public win(): void {
-        // placeholder
-        alert('GANHOU');
         this.ended = true;
+        this.boxService.show(1);
     }
 
     public lose(): void {
-        //placeholder
-        alert('PERDEU');
         this.ended = true;
+        this.boxService.show(0);
     }
 
-    ngOnInit() {
-        this.wordlist = this.wordsService.getWords();
-        this.newGame();
+    get word(): string | null {
+        return this._word;
     }
 }

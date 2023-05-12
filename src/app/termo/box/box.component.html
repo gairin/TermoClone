@@ -1,15 +1,12 @@
-<body>
-	<div id="rectangle">
-		<section id="win">
-            <h1>VITÓRIA!</h1>
-            <h3>Você acertou a palavra em:</h3>
-            <p>X tentativas.</p>
-            <button>Novo Jogo</button>
-        </section>
-        <section id="lose" *ngIf="show && mode == 0">
-            <h1>DERROTA!</h1>
-            <h3>A palavra era: PALAVRA</h3>
-            <button>Novo Jogo</button>
-        </section>
-	</div>
-</body>
+<div id="rectangle">
+    <section id="win">
+        <h1>VITÓRIA!</h1>
+        <p>VOCÊ ADIVINHOU A PALAVRA {{showcaseInfo.word}} EM {{showcaseInfo.tries}} TENTATIVAS</p>
+        <button>NOVA PALAVRA</button>
+    </section>
+    <section id="lose">
+        <h1>DERROTA!</h1>
+        <p>A PALAVRA ERA:<br><span>PALAVRA</span></p>
+        <button>NOVA PALAVRA</button>
+    </section>
+</div>

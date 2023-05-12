@@ -83,7 +83,6 @@ export class BoardComponent implements OnInit {
         
         if (state == 1) {
             this.gameService.win();
-            //this.modalComponent.show(1);
         } 
         
         this.paintSquares(data.colors);
@@ -95,7 +94,6 @@ export class BoardComponent implements OnInit {
 
         else {
             this.gameService.lose();
-            //this.modalComponent.show(0);
         }
     }
 

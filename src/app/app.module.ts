@@ -11,20 +11,24 @@ import { KeyboardModule } from './termo/keyboard/keyboard.module';
 import { BoxComponent } from './termo/box/box.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TermoComponent,
-    BoardComponent,
-    KeyboardComponent,
-    BoxComponent,
-  ],
-  imports: [
-    BrowserModule,
-    TermoModule,
-    BoardModule,
-    KeyboardModule
-  ],
-  providers: [BoardComponent],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        TermoComponent,
+        BoardComponent,
+        KeyboardComponent,
+        BoxComponent,
+    ],
+    imports: [
+        BrowserModule,
+        TermoModule,
+        BoardModule,
+        KeyboardModule
+    ],
+    providers: [
+        BoardComponent,
+        BoxComponent
+    ],
+    bootstrap: [AppComponent]
 })
+
 export class AppModule { }
