@@ -15,12 +15,18 @@ Possui tabuleiro 6x5, teclado, banco de palavras, verificação de palavra e vit
 
 ## Comentários
 A parte essencial do TermoClone está finalizada. Restam ainda algumas adições a serem feitas. Mas elas vão ficar para depois pra que eu possa tirar um pouco a cabeça deste projeto e me dedicar a outros mais importantes no momento.
+
 Esse também é meu primeiro """projeto""" independente, e meu primeiro app (terminado e funcional) com Angular. O código deve ser horrível mesmo e eu sei disso rs.
+
 Sim, eu sei que tem palavras com acento que não dá pra acertar, mas isso logo não será mais problema.
+
 Sim, eu sei que a palavra certa aparece no console, isso é por razões de debug e agilidade para testes.
 
 ## Futuras Adições ou Mudanças
-*Podem ser adicionadas ou não, depende da minha capacidade e vontade rs*
+*(Podem ser adicionadas ou não, depende da minha capacidade e vontade rs)*
+### Certeza
+- Tipar algumas variáveis que faltaram, adicionar public/private pra alguns métodos porque eu esqueci rs
+
 ### Prováveis
 - Suporte para acentos (no próprio teclado);
 - Banco de palavras em banco de dados;
