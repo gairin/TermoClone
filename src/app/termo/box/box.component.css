@@ -24,7 +24,7 @@ section {
     text-align: center;
 }
 
-button {
+.restart-button {
     display: block;
     margin: 0 auto;
     margin-top: 35px;

@@ -36,6 +36,10 @@ export class BoxComponent implements OnInit {
         }
 
         this.boxService.show(mode, this.showcaseInfo);
+
+        document.querySelector(".restart-button")?.addEventListener('click', () => {
+            window.location.reload();
+        });
     }
 
     ngOnInit() {

@@ -8,21 +8,25 @@ export class BoxService {
     content: HTMLDivElement | null;
     winMode: HTMLElement | null;
     loseMode: HTMLElement | null;
+    winText: string;
+    loseText: string;
 
     constructor() {
         this.content = null;
         this.winMode = null;
         this.loseMode = null;
+        this.winText = '';
+        this.loseText = '';
     }
 
-    stylize(element: HTMLParagraphElement) {
+    private stylize(element: HTMLParagraphElement) {
         element.style.backgroundColor = 'transparent';
         element.style.color = 'white';
         element.style.fontWeight = '300';
         element.style.fontSize = '110%'
     }
 
-    show(
+    public show(
         mode: number,
         info: {
         tries: number;
@@ -38,20 +42,36 @@ export class BoxService {
         this.content.style.display = 'block';
 
         if (mode == 1) {
-            const winText = document.createElement('p');
-            winText.innerText = `VOCÊ ADIVINHOU A PALAVRA ${info.word} EM ${info.tries} TENTATIVAS`;
-            this.winMode.insertBefore(winText, this.winMode.lastChild);
-            this.stylize(winText);
+            if (!document.querySelector('p')) {          
+                const winText = document.createElement('p');
+                this.winText = `VOCÊ ADIVINHOU A PALAVRA ${info.word} EM ${info.tries} TENTATIVAS`;
+                winText.innerText = this.winText
+                this.winMode.insertBefore(winText, this.winMode.lastChild);
+                this.stylize(winText);
+            }
 
+            else {
+                this.winText = `VOCÊ ADIVINHOU A PALAVRA ${info.word} EM ${info.tries} TENTATIVAS`;
+                document.querySelector("p")!.innerText = this.winText
+            }
+                
             this.winMode.style.display = 'block';
-            this.loseMode.style.display = 'none'
+            this.loseMode.style.display = 'none';
         }
 
         else {
-            const loseText = document.createElement('p');
-            loseText.innerText = `A PALAVRA ERA: ${info.word}`;
-            this.loseMode.insertBefore(loseText, this.loseMode.lastChild);
-            this.stylize(loseText);
+            if (!document.querySelector('p')) {          
+                const loseText = document.createElement('p');
+                this.loseText = `A PALAVRA ERA: ${info.word}`;
+                loseText.innerText = this.loseText
+                this.loseMode.insertBefore(loseText, this.loseMode.lastChild);
+                this.stylize(loseText);
+            }
+
+            else {
+                this.loseText = `A PALAVRA ERA: ${info.word}`;
+                document.querySelector("p")!.innerText = this.loseText
+            }
 
             this.loseMode.style.display = 'block';
             this.winMode.style.display = 'none'
