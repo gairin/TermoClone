@@ -4,14 +4,14 @@ Possui tabuleiro 6x5, teclado, banco de palavras, verificação de palavra e vit
 
 ## Estado de Completude:
 **Essencialmente finalizado**
-[x] Parte Visual
-[x] Lógica do teclado
-[x] Lógica do tabuleiro
-[x] Lógica de verificação
-[x] Fim de jogo
-[x] Modal de texto
-[ ] Extras
-[ ] Armazenamento de dados em um banco
+- [x] Parte Visual
+- [x] Lógica do teclado
+- [x] Lógica do tabuleiro
+- [x] Lógica de verificação
+- [x] Fim de jogo
+- [x] Modal de texto
+- [ ] Extras
+- [ ] Armazenamento de dados em um banco
 
 ## Comentários
 A parte essencial do TermoClone está finalizada. Restam ainda algumas adições a serem feitas. Mas elas vão ficar para depois pra que eu possa tirar um pouco a cabeça deste projeto e me dedicar a outros mais importantes no momento.
